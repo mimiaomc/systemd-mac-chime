@@ -1,0 +1,23 @@
+[Unit]
+Description=D-Bus Listener for Mac Boot Sound
+# 等 PipeWire 好
+After=pipewire.service wireplumber.service
+
+[Service]
+Type=simple
+# 用 gdbus 监听系统的电源控制总线
+# 捕捉到 PrepareForSleep 变成 false 触发 pw-play
+ExecStart=/usr/bin/bash -c '\
+gdbus monitor --system --dest org.freedesktop.login1 --object-path /org/freedesktop/login1 | \
+while read -r line; do \
+    if echo "$line" | grep -q "PrepareForSleep" && echo "$line" | grep -q "false"; then \
+        sleep 0.5; \
+        /usr/bin/pw-play /usr/local/share/sounds/custom/mac_chime.wav; \
+    fi; \
+done'
+Restart=always
+
+[Install]
+# 挂载到标准的默认用户目标，登录就自动常驻后台
+WantedBy=default.target
+
