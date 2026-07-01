@@ -6,13 +6,13 @@ Wants=wireplumber.service
 [Service]
 Type=simple
 # 检查 /tmp 下有没有锁文件。如果有，静默跳过
-ExecCondition=/usr/bin/bash -c '[ ! -f /tmp/mac_chime_played.lock ]'
+ExecCondition=/usr/bin/bash -c '[ ! -f /tmp/chime_played.lock ]'
 
 ExecStartPre=/usr/bin/sleep 0.5
 ExecStart=/usr/bin/pw-play /usr/local/share/sounds/custom/mac_chime.wav
 
 # 放完扔一个锁文件到 /tmp，实现全局每次开机绝对只响一次
-ExecStartPost=/usr/bin/touch /tmp/mac_chime_played.lock
+ExecStartPost=/usr/bin/touch /tmp/chime_played.lock
 StandardOutput=journal
 
 [Install]
