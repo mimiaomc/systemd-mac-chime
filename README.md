@@ -6,19 +6,20 @@ Plays the classic Mac Chime/Windows boot sound on linux starting up and resume.
 
 ## 使用方法
 
-文件说明
+文件说明：
 
-- ```chime.service``` 为启动时发声服务
-- ```chime-resume.service``` 为唤醒时发声服务
-- ```mac_chime.wav``` 为 Mac 唤醒声音（来自[维基百科](https://en.wikipedia.org/wiki/File:MacStartupChime.ogg)，转换成了 wav 文件）
+- ```chime.service``` 为启动时发声服务；
+- ```chime-resume.service``` 为唤醒时发声服务；
+- ```mac_chime.wav``` 为 Mac 唤醒声音（来自[维基百科](https://en.wikipedia.org/wiki/File:MacStartupChime.ogg)，转换成了 wav 文件）；
+- ```winxp.wav``` 为 Windows XP 启动声音。
 
-请按照自身需求（例如想让电脑启动时或者唤醒时发声）选择文件
+请按照自身需求（例如想让电脑启动时或者唤醒时发声）选择文件。
 
 请把 ```service```文件放进：
-```/etc/systemd/user/```
+```/etc/systemd/user/```；
 
 然后把 ```wav``` 文件放进：
-```/usr/local/share/sounds/custom/```
+```/usr/local/share/sounds/custom/```。
 
 示例命令：
 ```
